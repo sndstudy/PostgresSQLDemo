@@ -2,14 +2,14 @@ const pg = require("pg");
 
 const user = "postgres";
 const ip = "192.168.99.100";
-const port = "32772";
+const port = "32768";
 const db = "demo"
 
 const conString = "postgres://" + user + ":@" + ip + ":" + port + "/" + db;
 
 var client = new pg.Client(conString);
 
-client.connect(function(err){
+client.connect().then((err)=>{
 
     if(err){
 
@@ -17,7 +17,7 @@ client.connect(function(err){
     
     }
 
-    client.query('SELECT id FROM testuser',function(err,result){
+    client.query('SELECT id FROM testuser').then((result,err)=>{
 
         if(err){
 
